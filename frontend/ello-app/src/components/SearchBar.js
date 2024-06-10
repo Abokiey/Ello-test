@@ -5,7 +5,6 @@ const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
   const handleSearch = async () => {
-    // Simulate a book search with dummy data
     const results = [
       { id: 1, title: 'Book One', author: 'Author One' },
       { id: 2, title: 'Book Two', author: 'Author Two' },
