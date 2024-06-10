@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
+import { useLazyQuery, gql } from '@apollo/client';
+
+const SEARCH_BOOKS = gql`
+  query SearchBooks($query: String!) {
+    searchBooks(query: $query) {
+      id
+      title
+      author
+      coverPhotoURL
+      readingLevel
+    }
+  }
+`;
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+  const [searchBooks, { loading, error }] = useLazyQuery(SEARCH_BOOKS, {
+    variables: { query },
+    onCompleted: (data) => {
+      onSearch(data.searchBooks);
+    }
+  });
 
-  const handleSearch = async () => {
-    const results = [
-      { id: 1, title: 'Book One', author: 'Author One' },
-      { id: 2, title: 'Book Two', author: 'Author Two' },
-    ].filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
-    onSearch(results);
+  const handleSearch = () => {
+    searchBooks();
   };
 
   return (
@@ -26,9 +41,11 @@ const SearchBar = ({ onSearch }) => {
         color="primary" 
         onClick={handleSearch}
         sx={{ ml: 2 }}
+        disabled={loading}
       >
         Search
       </Button>
+      {error && <p>Error: {error.message}</p>}
     </Box>
   );
 };

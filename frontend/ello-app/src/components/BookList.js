@@ -1,4 +1,3 @@
-// src/components/BookList.js
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { List, ListItem, ListItemText, Button } from '@mui/material';

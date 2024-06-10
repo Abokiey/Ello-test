@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { Container, Box, Typography, CssBaseline } from '@mui/material';
 import ApolloClientProvider from './ApolloClient';
