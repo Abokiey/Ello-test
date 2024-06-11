@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
 
-const SEARCH_BOOKS = gql`
-  query SearchBooks($query: String!) {
-    searchBooks(query: $query) {
+const SEARCH_BOOKS_BY_TITLE = gql`
+  query Books($title: String!) {
+    books(title: $title) {
       title
       author
       coverPhotoURL
@@ -14,26 +14,28 @@ const SEARCH_BOOKS = gql`
 `;
 
 const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
-  const [searchBooks, { loading, error }] = useLazyQuery(SEARCH_BOOKS, {
-    variables: { query },
+  const [title, setTitle] = useState('');
+
+  const [searchBooks, { loading, error }] = useLazyQuery(SEARCH_BOOKS_BY_TITLE, {
     onCompleted: (data) => {
-      onSearch(data.searchBooks);
+      onSearch(data.books);
     }
   });
 
   const handleSearch = () => {
-    searchBooks();
+    if (title.trim() !== '') {
+      searchBooks({ variables: { title } });
+    }
   };
 
   return (
     <Box display="flex" mb={2}>
       <TextField 
-        label="Search for a book" 
+        label="Search for a book by title" 
         variant="outlined" 
         fullWidth 
-        value={query} 
-        onChange={(e) => setQuery(e.target.value)} 
+        value={title} 
+        onChange={(e) => setTitle(e.target.value)} 
       />
       <Button 
         variant="contained" 

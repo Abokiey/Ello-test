@@ -4,17 +4,21 @@ import ApolloClientProvider from './ApolloClient';
 import SearchBar from './components/SearchBar';
 import BookList from './components/BookList';
 import ReadingList from './components/ReadingList';
-import FetchBooks from './components/FetchBooks';
 
 function App() {
   const [readingList, setReadingList] = useState([]);
+  const [searchedBooks, setSearchedBooks] = useState([]);
 
   const addBookToReadingList = (book) => {
     setReadingList([...readingList, book]);
   };
 
   const removeBookFromReadingList = (bookToRemove) => {
-    setReadingList(readingList.filter(book => book.id !== bookToRemove.id));
+    setReadingList(readingList.filter(book => book.title !== bookToRemove.title));
+  };
+
+  const handleSearch = (books) => {
+    setSearchedBooks(books);
   };
 
   return (
@@ -25,9 +29,8 @@ function App() {
           <Typography variant="h4" component="h1" gutterBottom>
             Book App for Teachers
           </Typography>
-          <SearchBar />
-          <FetchBooks />
-          <BookList onAdd={addBookToReadingList} />
+          <SearchBar onSearch={handleSearch} />
+          <BookList books={searchedBooks} onAdd={addBookToReadingList} />
           <ReadingList books={readingList} onRemove={removeBookFromReadingList} />
         </Box>
       </Container>
