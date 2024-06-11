@@ -5,7 +5,6 @@ import { useLazyQuery, gql } from '@apollo/client';
 const SEARCH_BOOKS = gql`
   query SearchBooks($query: String!) {
     searchBooks(query: $query) {
-      id
       title
       author
       coverPhotoURL

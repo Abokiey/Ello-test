@@ -4,6 +4,7 @@ import ApolloClientProvider from './ApolloClient';
 import SearchBar from './components/SearchBar';
 import BookList from './components/BookList';
 import ReadingList from './components/ReadingList';
+import FetchBooks from './components/FetchBooks';
 
 function App() {
   const [readingList, setReadingList] = useState([]);
@@ -25,6 +26,7 @@ function App() {
             Book App for Teachers
           </Typography>
           <SearchBar />
+          <FetchBooks />
           <BookList onAdd={addBookToReadingList} />
           <ReadingList books={readingList} onRemove={removeBookFromReadingList} />
         </Box>
