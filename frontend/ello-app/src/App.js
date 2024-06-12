@@ -11,7 +11,12 @@ function App() {
   const [searchedBooks, setSearchedBooks] = useState([]);
 
   const addBookToReadingList = (book) => {
-    setReadingList([...readingList, book]);
+    // Check if the book is already in the reading list
+    if (!readingList.some(b => b.title === book.title)) {
+      setReadingList([...readingList, book]);
+    } else {
+      alert('Book already in the reading list');
+    }
   };
 
   const removeBookFromReadingList = (bookToRemove) => {
@@ -40,7 +45,9 @@ function App() {
           </Box>
           <SearchBar onSearch={handleSearch} />
           <BookList books={searchedBooks} onAdd={addBookToReadingList} />
-          <ReadingList books={readingList} onRemove={removeBookFromReadingList} />
+          {readingList.length > 0 && (
+            <ReadingList books={readingList} onRemove={removeBookFromReadingList} />
+          )}
         </Box>
       </Container>
     </ApolloClientProvider>
