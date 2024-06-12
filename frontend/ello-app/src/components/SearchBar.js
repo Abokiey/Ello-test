@@ -34,7 +34,10 @@ const SearchBar = ({ onSearch }) => {
         label="Search for a book" 
         variant="outlined" 
         fullWidth 
-        value={title} 
+        sx={{ 
+          '& input': { color: '#28B8B8' }, 
+          '& .MuiInputLabel-root': { color: '#28B8B8' },
+        }} 
         onChange={(e) => setTitle(e.target.value)} 
       />
       <Button 
