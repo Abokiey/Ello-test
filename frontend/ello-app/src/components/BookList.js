@@ -7,7 +7,7 @@ const BookList = ({ books, onAdd }) => {
   const totalPages = Math.ceil(books.length / booksPerPage);
 
   const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage, 1));
+    setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
   };
 
   const handleNextPage = () => {

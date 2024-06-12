@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <Box display="flex" mb={2}>
+    <Box display="flex" mb={2} sx={{ color: '#28B8B8' }}>
       <TextField 
         label="Search for a book" 
         variant="outlined" 
