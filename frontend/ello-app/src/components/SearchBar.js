@@ -31,7 +31,7 @@ const SearchBar = ({ onSearch }) => {
   return (
     <Box display="flex" mb={2}>
       <TextField 
-        label="Search for a book by title" 
+        label="Search for a book" 
         variant="outlined" 
         fullWidth 
         value={title} 
@@ -41,7 +41,7 @@ const SearchBar = ({ onSearch }) => {
         variant="contained" 
         color="primary" 
         onClick={handleSearch}
-        sx={{ ml: 2 }}
+        sx={{ backgroundColor: '#5ACCCC', '&:hover': { backgroundColor: '#28B8B8' } }}
         disabled={loading}
       >
         Search
