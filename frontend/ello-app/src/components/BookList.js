@@ -24,7 +24,18 @@ const BookList = ({ books, onAdd }) => {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {currentBooks.map((book) => (
           <Box key={book.title} sx={{ width: '50%', padding: 1, boxSizing: 'border-box' }}>
-            <Card sx={{ display: 'flex', width: '100%', margin: '0 auto' }}>
+            <Card
+              sx={{
+                display: 'flex',
+                width: '100%',
+                margin: '0 auto',
+                transition: 'transform 0.2s, filter 0.2s',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  filter: 'brightness(96%)',
+                },
+              }}
+            >
               <Box sx={{ display: 'flex', alignItems: 'center', padding: 2 }}>
                 <img src={book.coverPhotoURL} alt={book.title} style={{ width: 120, height: 120, objectFit: 'cover' }} />
               </Box>
